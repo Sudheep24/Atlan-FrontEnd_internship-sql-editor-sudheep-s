@@ -38,7 +38,7 @@ A modern, feature-rich SQL query editor designed for data analysts to efficientl
 - Efficient state management using React hooks
 - Debounced search and filter operations
 
-### UI/UX Optimizations
+### UI/UX Optimization
 
 - Resizable results panel
 - Responsive layout with dynamic adjustments

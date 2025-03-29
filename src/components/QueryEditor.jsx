@@ -6,6 +6,7 @@ import './QueryEditor.css';
 
 function QueryEditor({ value, onChange, onExecute, isLoading, isDarkMode }) {
   const editorRef = useRef(null);
+  const monacoRef = useRef(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [queryName, setQueryName] = useState('');
   const [savedQueries, setSavedQueries] = useState(() => {
@@ -22,9 +23,97 @@ function QueryEditor({ value, onChange, onExecute, isLoading, isDarkMode }) {
     }
   }, [executionTime]);
 
+  // Configure Monaco editor autocomplete when editor is mounted
+  const handleEditorWillMount = useCallback((monaco) => {
+    monacoRef.current = monaco;
+    
+    // Register SQL keywords for autocompletion
+    const sqlKeywords = [
+      'SELECT', 'FROM', 'WHERE', 'JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 
+      'OUTER JOIN', 'GROUP BY', 'ORDER BY', 'HAVING', 'LIMIT', 'OFFSET', 'INSERT INTO', 
+      'VALUES', 'UPDATE', 'SET', 'DELETE FROM', 'CREATE TABLE', 'ALTER TABLE', 'DROP TABLE', 
+      'CREATE INDEX', 'DROP INDEX', 'COUNT', 'SUM', 'AVG', 'MIN', 'MAX', 'AS', 'DISTINCT', 
+      'UNION', 'UNION ALL', 'INTERSECT', 'EXCEPT', 'IN', 'NOT', 'BETWEEN', 'LIKE', 'IS NULL', 
+      'IS NOT NULL', 'AND', 'OR', 'DESC', 'ASC', 'CASE', 'WHEN', 'THEN', 'ELSE', 'END'
+    ];
+
+    // Register custom autocomplete provider
+    monaco.languages.registerCompletionItemProvider('sql', {
+      provideCompletionItems: (model, position) => {
+        const word = model.getWordUntilPosition(position);
+        const range = {
+          startLineNumber: position.lineNumber,
+          endLineNumber: position.lineNumber,
+          startColumn: word.startColumn,
+          endColumn: word.endColumn
+        };
+
+        // Create SQL keyword suggestions
+        const keywordSuggestions = sqlKeywords.map(keyword => ({
+          label: keyword,
+          kind: monaco.languages.CompletionItemKind.Keyword,
+          insertText: keyword,
+          range: range
+        }));
+
+        // Create suggestions from saved queries
+        const savedQuerySuggestions = savedQueries.map(savedQuery => ({
+          label: savedQuery.name,
+          kind: monaco.languages.CompletionItemKind.Snippet,
+          insertText: savedQuery.query,
+          documentation: savedQuery.query,
+          detail: `Saved Query: ${new Date(savedQuery.timestamp).toLocaleString()}`,
+          range: range
+        }));
+
+        // Combine suggestions
+        return {
+          suggestions: [...keywordSuggestions, ...savedQuerySuggestions]
+        };
+      }
+    });
+  }, [savedQueries]);
+
+  // Update the autocomplete provider when savedQueries changes
+  useEffect(() => {
+    if (monacoRef.current && editorRef.current) {
+      // Manually trigger the completion provider refresh
+      monacoRef.current.editor.registerCommand('refreshCompletionItems', () => {
+        if (editorRef.current) {
+          editorRef.current.trigger('source', 'editor.action.triggerSuggest', {});
+        }
+      });
+    }
+  }, [savedQueries]);
+
   // Memoize event handlers to prevent recreating them on each render
-  const handleEditorDidMount = useCallback((editor) => {
+  const handleEditorDidMount = useCallback((editor, monaco) => {
     editorRef.current = editor;
+    
+    // Setup additional editor configurations
+    editor.addAction({
+      id: 'execute-query',
+      label: 'Execute Query',
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
+      run: handleExecute
+    });
+
+    editor.addAction({
+      id: 'format-query',
+      label: 'Format Query',
+      keybindings: [monaco.KeyMod.Shift | monaco.KeyMod.Alt | monaco.KeyCode.KeyF],
+      run: handleFormat
+    });
+
+    editor.addAction({
+      id: 'save-query',
+      label: 'Save Query',
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
+      run: () => {
+        setShowSaveModal(true);
+        return null;
+      }
+    });
   }, []);
 
   const handleExecute = useCallback(async () => {
@@ -147,7 +236,7 @@ function QueryEditor({ value, onChange, onExecute, isLoading, isDarkMode }) {
     });
   }, [queryName, value, savedQueries, isDarkMode, saveToLocalStorage]);
 
-  // Optimize editor options for performance
+  // Optimize editor options for performance and enhance autocomplete
   const editorOptions = {
     minimap: { enabled: false },
     fontSize: 14,
@@ -156,10 +245,18 @@ function QueryEditor({ value, onChange, onExecute, isLoading, isDarkMode }) {
     scrollBeyondLastLine: false,
     automaticLayout: true,
     padding: { top: 10, bottom: 10 },
+    // Enable autocomplete features
+    quickSuggestions: {
+      other: true,
+      comments: true,
+      strings: true
+    },
+    suggestOnTriggerCharacters: true,
+    wordBasedSuggestions: true,
+    // Improve autocomplete experience
+    acceptSuggestionOnEnter: "on",
+    tabCompletion: "on",
     // Disable features that might cause lag during batch operations
-    quickSuggestions: !isLoading && savedQueries.length < 100,
-    wordBasedSuggestions: !isLoading && savedQueries.length < 100,
-    // Reduce parsing work during heavy operations
     folding: !isLoading,
     // Optimize for large files
     largeFileOptimizations: true,
@@ -212,6 +309,7 @@ function QueryEditor({ value, onChange, onExecute, isLoading, isDarkMode }) {
           defaultLanguage="sql"
           value={value}
           onChange={onChange}
+          beforeMount={handleEditorWillMount}
           onMount={handleEditorDidMount}
           theme={isDarkMode ? "vs-dark" : "light"}
           options={editorOptions}
@@ -230,6 +328,7 @@ function QueryEditor({ value, onChange, onExecute, isLoading, isDarkMode }) {
           <span>Execute: <kbd>Ctrl</kbd>+<kbd>Enter</kbd></span>
           <span>Format: <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd></span>
           <span>Save: <kbd>Ctrl</kbd>+<kbd>S</kbd></span>
+          <span>Autocomplete: <kbd>Ctrl</kbd>+<kbd>Space</kbd></span>
         </div>
       </div>
 

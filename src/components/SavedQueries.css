@@ -47,6 +47,7 @@
   border-radius: 8px;
   font-size: 0.875rem;
   transition: all 0.2s;
+  background-color:#e5e7eb ;
 }
 
 .dark-theme .search-box input {

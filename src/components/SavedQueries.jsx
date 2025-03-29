@@ -24,11 +24,9 @@ const AnalystTips = memo(() => (
       <li><span className="tip-icon">⌨️</span> Format query: <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd></li>
       <li><span className="tip-icon">📜</span> History: <kbd>Ctrl</kbd>+<kbd>H</kbd></li>
       <li><span className="tip-icon">💾</span> Save query: <kbd>Ctrl</kbd>+<kbd>S</kbd></li>
-      <li><span className="tip-icon">📊</span> Export: <kbd>Ctrl</kbd>+<kbd>E</kbd></li>
-      <li><span className="tip-icon">🔍</span> Search: <kbd>Ctrl</kbd>+<kbd>P</kbd></li>
       <li><span className="tip-icon">⚡</span> Add <code>--large-dataset</code> for 1000 rows</li>
       <li><span className="tip-icon">🚀</span> Add <code>--huge-dataset</code> for 10,000 rows</li>
-      <li><span className="tip-icon">↔️</span> Drag handles to resize panels</li>
+    
     </ul>
   </div>
 ));
