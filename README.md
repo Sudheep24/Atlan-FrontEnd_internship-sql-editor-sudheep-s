@@ -1,3 +1,54 @@
+# Project Overview
+
+This project is built using a JavaScript framework with various optimizations to enhance performance. Below are the details of the framework, plugins, and performance optimizations applied.
+
+## Framework and Dependencies
+
+- **Framework:** React (with Vite for fast builds and hot module replacement)
+- **Major Plugins & Packages:**
+  - React Router for navigation
+  - Lodash for utility functions
+
+## Page Load Performance
+
+- **Finish Time:** 682 ms
+- **DOMContentLoaded:** 164 ms
+
+- **Verified Load Time (via Network Tab):** 550 ms
+
+## Performance Optimizations
+
+To improve performance and reduce load time, the following optimizations were implemented:
+
+1. **Code Splitting:**
+
+   - Used dynamic imports (`React.lazy` and `Suspense`) to load components only when needed.
+
+2. **Caching & Compression:**
+
+   - Enabled browser caching.
+   - Used gzip compression to reduce asset sizes.
+
+3. **Optimized Dependencies:**
+
+   - Removed unnecessary dependencies and reduced bundle size.
+   - Used `lodash.debounce` for efficient input handling.
+
+4. **Optimized Rendering:**
+
+   - Used `useMemo` and `useCallback` to prevent unnecessary re-renders.
+   - Implemented memoization for expensive computations.
+
+5. **Efficient Asset Loading:**
+
+   - Used lazy loading for images and components.
+
+6. **Improved CSS & Styling:**
+
+   - Minimized unused CSS and JavaScript files.
+
+These improvements contributed to better page speed and user experience.
+
 # SQL Query Editor
 
 A high-performance, feature-rich SQL query editor designed for data analysts and developers to execute, analyze, and manage SQL queries efficiently.
@@ -26,16 +77,12 @@ A high-performance, feature-rich SQL query editor designed for data analysts and
 - 📊 **Interactive charts & visualizations**
 
 ## 📌 Class Diagram
+
 ![Class Diagram](public/Class_Diagram.png)
 
 ## 🎯 Architecture Diagram
+
 ![Architecture Diagram](public/architeture_diagram.png)
-
-
-
-
-
-
 
 ## 🔥 Performance Optimizations
 
@@ -75,7 +122,6 @@ _(Add Performance Images Here)_
 - **Query Execution** → < 500ms
 - **Result Rendering** → < 100ms for 1,000 rows
 - **Chart Rendering** → < 200ms for 1,000 data points
-
 
 ## 🛠️ Technology Stack
 
