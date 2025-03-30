@@ -26,7 +26,7 @@ A high-performance, feature-rich SQL query editor designed for data analysts and
 - 📊 **Interactive charts & visualizations**
 
 ## 🎯 Architecture Diagram
-![Architecture Diagram](images/architeture_diagram.png)
+![Architecture Diagram](public/architeture_diagram.png)
 
 
 ### 📌 Class Diagram
