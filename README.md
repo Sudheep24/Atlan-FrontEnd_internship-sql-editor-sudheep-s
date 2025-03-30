@@ -1,7 +1,15 @@
 # Project Overview
 
 This project is built using a JavaScript framework with various optimizations to enhance performance. Below are the details of the framework, plugins, and performance optimizations applied.
-[Visit the Hosted Link]([https://your-hosted-link.com](https://atlan-front-end-internship-sql-editor-sudheep-s.vercel.app/))
+
+
+## 🚀 Live Demo
+
+You can access the hosted version of this project here:  
+👉 [Visit the SQL Editor](https://atlan-front-end-internship-sql-editor-sudheep-s.vercel.app)
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://atlan-front-end-internship-sql-editor-sudheep-s.vercel.app)
+
 
 
 ## Framework and Dependencies
