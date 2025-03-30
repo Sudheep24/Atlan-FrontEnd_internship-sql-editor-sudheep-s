@@ -10,16 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "@monaco-editor/react": "^4.6.0",
-    "sql-formatter": "^15.2.0",
-    "react-hot-toast": "^2.4.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
-    "xlsx": "^0.18.5",
+    "lodash": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.4.1",
+    "react-window": "^1.8.11",
+    "recharts": "^2.12.0",
+    "sql-formatter": "^15.2.0",
     "web-vitals": "^3.5.2",
-    "recharts": "^2.12.0"
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

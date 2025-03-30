@@ -1,11 +1,13 @@
 import { useState, useEffect, useCallback, useMemo, memo } from 'react';
+import { FixedSizeList as List } from 'react-window';
+import debounce from 'lodash.debounce';
 import { sampleQueries } from '../data/sampleQueries';
 import './SavedQueries.css';
 
-// Memoized query item to prevent unnecessary re-renders
+// Memoized query item
 const QueryItem = memo(({ query, isActive, onSelect }) => (
   <div 
-    className={`query-item ${isActive ? 'active' : ''}`}
+    className={`query-item ${isActive ? 'active' : ''}`} 
     onClick={() => onSelect(query)}
   >
     <span className="query-icon">󰆼</span>
@@ -16,7 +18,7 @@ const QueryItem = memo(({ query, isActive, onSelect }) => (
   </div>
 ));
 
-// Memoized tips component since this never changes
+// Memoized SQL Tips component
 const AnalystTips = memo(() => (
   <div className="analyst-tips">
     <h3>SQL Pro Tips</h3>
@@ -25,9 +27,7 @@ const AnalystTips = memo(() => (
       <li><span className="tip-icon">📜</span> History: <kbd>Ctrl</kbd>+<kbd>H</kbd></li>
       <li><span className="tip-icon">💾</span> Save query: <kbd>Ctrl</kbd>+<kbd>S</kbd></li>
       <li><span className="tip-icon">⚡</span> <strong>Type <code>--large-dataset</code> for 1000 rows</strong></li>
-<li><span className="tip-icon">🚀</span> <strong>Type <code>--huge-dataset</code> for 10,000 rows</strong></li>
-
-    
+      <li><span className="tip-icon">🚀</span> <strong>Type <code>--huge-dataset</code> for 10,000 rows</strong></li>
     </ul>
   </div>
 ));
@@ -36,67 +36,47 @@ function SavedQueries({ onSelectQuery, isDarkMode }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeQuery, setActiveQuery] = useState(null);
   const [savedQueries, setSavedQueries] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
 
-  // Load saved queries from localStorage
+  // Load saved queries from localStorage once
   useEffect(() => {
-    // Function to load saved queries
     const loadSavedQueries = () => {
       try {
         const saved = localStorage.getItem('savedQueries');
-        if (saved) {
-          // Use a function to update state based on previous state
-          setSavedQueries(JSON.parse(saved));
-        }
+        if (saved) setSavedQueries(JSON.parse(saved));
       } catch (error) {
         console.error("Error loading saved queries:", error);
       }
     };
 
-    // Initial load
     loadSavedQueries();
 
-    // Listen for storage changes
+    // Listen for storage updates
     window.addEventListener('storage', loadSavedQueries);
-    
-    // Custom event listener for immediate updates
     window.addEventListener('savedQueriesUpdated', loadSavedQueries);
-    
+
     return () => {
       window.removeEventListener('storage', loadSavedQueries);
       window.removeEventListener('savedQueriesUpdated', loadSavedQueries);
     };
   }, []);
 
-  // Memoize the combined queries to prevent recalculation on every render
+  // Combine sample queries and saved queries
   const allQueries = useMemo(() => [...sampleQueries, ...savedQueries], [savedQueries]);
-  
-  // Memoize filtered queries to avoid filtering on every render
+
+  // Efficient filtering with memoization
   const filteredQueries = useMemo(() => {
     if (!searchTerm.trim()) return allQueries;
-    
     const lowerSearchTerm = searchTerm.toLowerCase();
-    return allQueries.filter(query => 
+    return allQueries.filter(query =>
       query.name.toLowerCase().includes(lowerSearchTerm) ||
       query.query.toLowerCase().includes(lowerSearchTerm)
     );
   }, [allQueries, searchTerm]);
 
-  // Debounced search function
-  useEffect(() => {
-    if (isSearching) {
-      const timer = setTimeout(() => {
-        setIsSearching(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isSearching]);
-
-  // Handle search input with debounce
-  const handleSearchInput = useCallback((e) => {
-    setIsSearching(true);
-    setSearchTerm(e.target.value);
-  }, []);
+  // Debounced search input handler
+  const handleSearchInput = useCallback(debounce((value) => {
+    setSearchTerm(value);
+  }, 300), []);
 
   // Handle query selection
   const handleQuerySelect = useCallback((query) => {
@@ -104,34 +84,14 @@ function SavedQueries({ onSelectQuery, isDarkMode }) {
     onSelectQuery(query.query);
   }, [onSelectQuery]);
 
-  // Virtual list rendering for large datasets
-  const renderQueryItems = () => {
-
-    // This basic implementation limits the number of rendered items
-    const maxVisibleItems = 100; 
-    const visibleQueries = filteredQueries.slice(0, maxVisibleItems);
-    
-    return visibleQueries.map((query, index) => (
-      <QueryItem 
-        key={`${query.name}-${index}`}
-        query={query}
-        isActive={activeQuery === query.name}
-        onSelect={handleQuerySelect}
-      />
-    ));
-  };
-
-  // Show loading indicator during search
-  const renderContent = () => {
-    if (isSearching) {
-      return <div className="loading-indicator">Searching...</div>;
-    }
-
-    if (filteredQueries.length === 0) {
-      return <div className="no-results">No queries found</div>;
-    }
-
-    return <div className="query-group">{renderQueryItems()}</div>;
+  // Virtualized list renderer
+  const renderRow = ({ index, style }) => {
+    const query = filteredQueries[index];
+    return (
+      <div style={style} key={query.name}>
+        <QueryItem query={query} isActive={activeQuery === query.name} onSelect={handleQuerySelect} />
+      </div>
+    );
   };
 
   return (
@@ -141,12 +101,23 @@ function SavedQueries({ onSelectQuery, isDarkMode }) {
         <input 
           type="text" 
           placeholder="Search queries..." 
-          value={searchTerm}
-          onChange={handleSearchInput}
+          onChange={(e) => handleSearchInput(e.target.value)}
         />
       </div>
 
-      {renderContent()}
+      {filteredQueries.length === 0 ? (
+        <div className="no-results">No queries found</div>
+      ) : (
+        <List
+          height={400}
+          itemCount={filteredQueries.length}
+          itemSize={60}
+          width="100%"
+        >
+          {renderRow}
+        </List>
+      )}
+      
       <AnalystTips />
     </div>
   );
