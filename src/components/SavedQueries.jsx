@@ -24,8 +24,9 @@ const AnalystTips = memo(() => (
       <li><span className="tip-icon">⌨️</span> Format query: <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd></li>
       <li><span className="tip-icon">📜</span> History: <kbd>Ctrl</kbd>+<kbd>H</kbd></li>
       <li><span className="tip-icon">💾</span> Save query: <kbd>Ctrl</kbd>+<kbd>S</kbd></li>
-      <li><span className="tip-icon">⚡</span> Add <code>--large-dataset</code> for 1000 rows</li>
-      <li><span className="tip-icon">🚀</span> Add <code>--huge-dataset</code> for 10,000 rows</li>
+      <li><span className="tip-icon">⚡</span> <strong>Type <code>--large-dataset</code> for 1000 rows</strong></li>
+<li><span className="tip-icon">🚀</span> <strong>Type <code>--huge-dataset</code> for 10,000 rows</strong></li>
+
     
     </ul>
   </div>
@@ -105,9 +106,9 @@ function SavedQueries({ onSelectQuery, isDarkMode }) {
 
   // Virtual list rendering for large datasets
   const renderQueryItems = () => {
-    // For extremely large lists, consider implementing windowing with react-window
+
     // This basic implementation limits the number of rendered items
-    const maxVisibleItems = 100; // Limit visible items for performance
+    const maxVisibleItems = 100; 
     const visibleQueries = filteredQueries.slice(0, maxVisibleItems);
     
     return visibleQueries.map((query, index) => (

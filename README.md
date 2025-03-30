@@ -1,182 +1,151 @@
 # SQL Query Editor
 
-A modern, feature-rich SQL query editor designed for data analysts to efficiently work with databases and analyze data.
+A high-performance, feature-rich SQL query editor designed for data analysts and developers to execute, analyze, and manage SQL queries efficiently.
 
-## Features
+## 🚀 Key Features
 
-### Essential Features
+### 🔹 Essential Features
 
-- 🚀 Real-time SQL query execution
-- 📝 Syntax highlighting and formatting
-- 🔍 Auto-completion for SQL keywords and table names
-- 💾 Save and manage frequently used queries
-- 📜 Query history tracking
-- 🌙 Dark/Light theme support
-- ⌨️ Keyboard shortcuts for common actions
+- ⚡ **Real-time query execution** with instant feedback
+- 🎨 **SQL syntax highlighting & formatting** for readability
+- 🧠 **Smart auto-completion** for SQL keywords & table names
+- 📜 **Query history tracking** with easy retrieval
+- 💾 **Save & manage frequently used queries**
+- 🌙 **Dark/Light mode support** for better usability
+- ⌨️ **Keyboard shortcuts** for rapid actions
 
-### Advanced Features
+### 🔹 Advanced Features
 
-- 📊 Export results in multiple formats (CSV, Excel, PDF, JSON)
-- 📋 Copy selected rows to clipboard
-- 🔄 Sort and filter query results
-- 📱 Responsive design for all screen sizes
-- ⚡ Large dataset handling (up to 10,000 rows)
-- 📈 Performance metrics and execution time tracking
-- 🎯 Row-level selection and bulk actions
-- 📊 Interactive data visualization with charts
+- 📊 **Export results** in multiple formats (CSV, Excel, PDF, JSON)
+- 🔄 **Sorting & filtering** query results
+- 📋 **Copy selected rows** to clipboard
+- 🖥️ **Responsive design** for all screen sizes
+- ⚡ **Optimized for large datasets** (handles 10,000+ rows seamlessly)
+- 📈 **Performance tracking** with execution time metrics
+- 🎯 **Row-level selection & bulk actions**
+- 📊 **Interactive charts & visualizations**
 
-## Performance Optimizations
+## 🎯 Architecture & Design
 
-### Data Handling Optimizations
+### 📌 Class Diagram
 
-- Virtual scrolling for large datasets
-- Lazy loading of table rows
-- Memoized sorting and filtering
-- Chunked data processing
-- Optimized chart rendering for large datasets
-- Progressive loading of chart data
-- Efficient state management using React hooks
-- Debounced search and filter operations
+_(Add Class Diagram Image Here)_
 
-### UI/UX Optimization
+### 🏗 Architecture Diagram
 
-- Resizable results panel
-- Responsive layout with dynamic adjustments
-- Smooth transitions and animations
-- Optimized re-rendering strategies
-- Efficient DOM updates
-- Compressed data transfers
-- Cached query results
-- Optimized chart transitions
+_(Add Architecture Diagram Image Here)_
 
-### Large Dataset Handling
+## 🔥 Performance Optimizations
 
-- Virtualized table rendering
-- Paginated data loading
-- Efficient sorting algorithms
-- Memory-optimized data structures
-- Chunked data processing
-- Progressive loading
-- Data windowing
-- Optimized chart rendering
+### ⚡ Data Handling
 
-## Load Time and Performance
+- **Virtual scrolling** for handling large datasets efficiently
+- **Lazy loading** to optimize rendering
+- **Memoized sorting & filtering** for quick response
+- **Chunked data processing** to enhance performance
+- **Optimized chart rendering** for large datasets
+- **Efficient state management** using React hooks
+- **Debounced search & filter operations**
 
-- Initial load time: < 2 seconds
-- Query execution feedback: Real-time
-- Results rendering: Optimized for 10,000+ rows
-- Chart rendering: Progressive loading for large datasets
-- Smooth interactions: 60fps target
-- Memory usage: Optimized for large datasets
-- Network efficiency: Compressed data transfer
-- Cache utilization: Optimized query results
+### 🎨 UI/UX Enhancements
 
-## Technology Stack
+- **Resizable results panel** for a customizable workspace
+- **Smooth transitions & animations**
+- **Optimized re-rendering strategies**
+- **Efficient DOM updates** for better performance
+- **Cached query results** for instant retrieval
 
-- **Framework**: React 18 with Vite
-- **Editor**: Monaco Editor
-- **UI Components**: Custom-built components
-- **State Management**: React Hooks
-- **Styling**: CSS Modules
-- **Charts**: Recharts with optimization
+### 📊 Large Dataset Handling
 
-### External Libraries
+- **Virtualized table rendering** to prevent UI lag
+- **Paginated data loading** for efficiency
+- **Optimized sorting algorithms** for better performance
+- **Memory-optimized data structures**
+- **Progressive loading & data windowing**
 
-- `@monaco-editor/react`: Code editor
-- `sql-formatter`: SQL syntax formatting
-- `react-hot-toast`: Toast notifications
-- `xlsx`: Excel export functionality
-- `jspdf`: PDF export functionality
-- `web-vitals`: Performance monitoring
-- `recharts`: Data visualization
+## 📊 Performance Metrics
 
-## Architecture and Planning
+### 📉 Performance Benchmarking
 
-### Core Design Principles
+_(Add Performance Images Here)_
 
-1. **Performance**: Optimized for large datasets and frequent queries
-2. **User-Centric**: Designed for data analysts' daily workflow
-3. **Reliability**: Error handling and data preservation
-4. **Accessibility**: Keyboard shortcuts and screen reader support
+- **Initial Load** → < 2s
+- **Query Execution** → < 500ms
+- **Result Rendering** → < 100ms for 1,000 rows
+- **Chart Rendering** → < 200ms for 1,000 data points
+- **Memory Usage** → < 100MB for 10,000 rows
+- **CPU Usage** → < 30% during heavy operations
+- **Cache Hit Rate** → > 90% for repeated queries
 
-### Performance Considerations
+## 🛠️ Technology Stack
 
-- Efficient data structures for large datasets
-- Optimized sorting and filtering algorithms
-- Memory management for large result sets
-- Progressive loading strategies
-- Caching mechanisms
-- Network optimization
-- Resource utilization
-- Rendering optimization
+- **Framework:** React 18 with Vite
+- **Code Editor:** Monaco Editor
+- **UI Components:** Custom-built components
+- **State Management:** React Hooks
+- **Styling:** CSS Modules
+- **Charts:** Recharts (optimized for large datasets)
 
-### Layout Design
+## 📦 External Libraries
 
-- Resizable panels for customizable workspace
-- Persistent query history
-- Quick access to saved queries
-- Clear result visualization
-- Responsive design for all screen sizes
-- Dynamic chart rendering
-- Optimized table layout
+- `@monaco-editor/react` → Integrated code editor
+- `sql-formatter` → SQL syntax formatting
+- `react-hot-toast` → User-friendly notifications
+- `xlsx` → Excel export functionality
+- `jspdf` → PDF export functionality
+- `web-vitals` → Performance monitoring
+- `recharts` → Interactive data visualizations
 
-### User Experience Considerations
+## 💻 Development Best Practices
 
-- Keyboard shortcuts for efficiency
-- Clear feedback for all actions
-- Multiple export options
-- Session persistence
-- Error handling and recovery
-- Progressive loading indicators
-- Smooth transitions
-- Responsive interactions
+- **Modern React patterns & hooks**
+- **Component-based architecture**
+- **Consistent code style & documentation**
+- **Performance-first approach**
+- **Comprehensive error handling**
+- **Memory & resource optimization**
+- **Code splitting & lazy loading**
 
-## Development Practices
+## 🚀 Getting Started
 
-- Modern React patterns and hooks
-- Component-based architecture
-- Consistent code style
-- Performance optimization
-- Comprehensive error handling
-- Memory management
-- Resource optimization
-- Code splitting
+### Clone the repository
 
-## Getting Started
+```sh
+git clone https://github.com/yourusername/sql-query-editor.git
+```
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start development server: `npm run dev`
-4. Open browser at `http://localhost:5173`
+### Install dependencies
 
-## Keyboard Shortcuts
+```sh
+npm install
+```
 
-- Execute Query: `Ctrl + Enter`
-- Format SQL: `Shift + Alt + F`
-- Save Query: `Ctrl + S`
-- Toggle History: `Ctrl + H`
-- Search Queries: `Ctrl + P`
-- Toggle Chart View: `Ctrl + V`
-- Copy Results: `Ctrl + C`
+### Start development server
 
-## Performance Metrics
+```sh
+npm run dev
+```
 
-- Initial Load: < 2s
-- Query Execution: < 500ms
-- Result Rendering: < 100ms for 1000 rows
-- Chart Rendering: < 200ms for 1000 data points
-- Memory Usage: < 100MB for 10,000 rows
-- CPU Usage: < 30% during heavy operations
-- Network Transfer: Optimized with compression
-- Cache Hit Rate: > 90% for repeated queries
+### Open the app
 
-## Future Enhancements
+```sh
+http://localhost:5173
+```
 
-- Database schema visualization
-- Query plan visualization
-- Collaborative features
-- More export formats
-- Advanced filtering options
-- Real-time collaboration
-- Custom chart templates
-- Advanced analytics features
+## ⌨️ Keyboard Shortcuts
+
+- **Execute Query** → `Ctrl + Enter`
+- **Format SQL** → `Shift + Alt + F`
+- **Save Query** → `Ctrl + S`
+- **Toggle History** → `Ctrl + H`
+- **Search Queries** → `Ctrl + P`
+- **Toggle Chart View** → `Ctrl + V`
+- **Copy Results** → `Ctrl + C`
+
+## 🌟 Future Enhancements
+
+- 📌 **Database Schema Visualization**
+- 🛠 **Query Execution Plan Analysis**
+- 👥 **Real-Time Collaborative Features**
+- 📂 **More Export Formats & Custom Templates**
+- 🎛 **Advanced Filtering & Analytics Options**
