@@ -75,9 +75,7 @@ _(Add Performance Images Here)_
 - **Query Execution** → < 500ms
 - **Result Rendering** → < 100ms for 1,000 rows
 - **Chart Rendering** → < 200ms for 1,000 data points
-- **Memory Usage** → < 100MB for 10,000 rows
-- **CPU Usage** → < 30% during heavy operations
-- **Cache Hit Rate** → > 90% for repeated queries
+
 
 ## 🛠️ Technology Stack
 
@@ -113,7 +111,7 @@ _(Add Performance Images Here)_
 ### Clone the repository
 
 ```sh
-git clone https://github.com/yourusername/sql-query-editor.git
+git clone https://github.com/Sudheep24/Atlan-FrontEnd_internship-sql-editor-sudheep-s
 ```
 
 ### Install dependencies
