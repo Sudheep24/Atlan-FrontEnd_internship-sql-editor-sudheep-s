@@ -104,6 +104,10 @@ A high-performance, feature-rich SQL query editor designed for data analysts and
 
 ![Architecture Diagram](public/architeture_diagram.png)
 
+## 🎯 ER Diagram
+
+![ER Diagram](public/er_diagram.png)
+
 ## 🔥 Performance Optimizations
 
 ### ⚡ Data Handling
