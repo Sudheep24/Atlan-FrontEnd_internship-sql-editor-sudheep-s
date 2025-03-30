@@ -76,6 +76,16 @@ A high-performance, feature-rich SQL query editor designed for data analysts and
 - 🎯 **Row-level selection & bulk actions**
 - 📊 **Interactive charts & visualizations**
 
+## ⌨️ Keyboard Shortcuts
+
+- **Execute Query** → `Ctrl + Enter`
+- **Format SQL** → `Shift + Alt + F`
+- **Save Query** → `Ctrl + S`
+- **Toggle History** → `Ctrl + H`
+- **Search Queries** → `Ctrl + P`
+- **Toggle Chart View** → `Ctrl + V`
+- **Copy Results** → `Ctrl + C`
+
 ## 📌 Class Diagram
 
 ![Class Diagram](public/Class_Diagram.png)
@@ -178,20 +188,6 @@ npm run dev
 http://localhost:5173
 ```
 
-## ⌨️ Keyboard Shortcuts
 
-- **Execute Query** → `Ctrl + Enter`
-- **Format SQL** → `Shift + Alt + F`
-- **Save Query** → `Ctrl + S`
-- **Toggle History** → `Ctrl + H`
-- **Search Queries** → `Ctrl + P`
-- **Toggle Chart View** → `Ctrl + V`
-- **Copy Results** → `Ctrl + C`
 
-## 🌟 Future Enhancements
 
-- 📌 **Database Schema Visualization**
-- 🛠 **Query Execution Plan Analysis**
-- 👥 **Real-Time Collaborative Features**
-- 📂 **More Export Formats & Custom Templates**
-- 🎛 **Advanced Filtering & Analytics Options**
