@@ -1,4 +1,5 @@
 # Project Overview
+# SQL Query Editor
 
 This project is built using a JavaScript framework with various optimizations to enhance performance. Below are the details of the framework, plugins, and performance optimizations applied.
 
@@ -59,7 +60,7 @@ To improve performance and reduce load time, the following optimizations were im
 
 These improvements contributed to better page speed and user experience.
 
-# SQL Query Editor
+
 
 A high-performance, feature-rich SQL query editor designed for data analysts and developers to execute, analyze, and manage SQL queries efficiently.
 
